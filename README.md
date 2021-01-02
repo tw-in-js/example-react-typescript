@@ -18,7 +18,7 @@ Features:
 
 **Step 1:**
 
-Clone this repo or click the **Use this template** button in GitHub:
+Clone this repo:
 
 ```sh
 git clone git@github.com:tw-in-js/example-react-typescript.git

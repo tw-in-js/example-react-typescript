@@ -1,4 +1,23 @@
 {
+  "name": "example-react-typescript",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js/example-react-typescript.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tw-in-js/example-react-typescript/issues"
+  },
+  "homepage": "https://github.com/tw-in-js/example-react-typescript/README.md",
+  "keywords": [
+    "twind",
+    "react",
+    "typescript",
+    "tailwind",
+    "tailwindcss",
+    "tw-in-js"
+  ],
+  "license": "ISC",
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
