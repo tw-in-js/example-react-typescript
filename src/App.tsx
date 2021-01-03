@@ -151,16 +151,16 @@ export default function App() {
           </section>
           <section className={tw`${directives.section}`}>
             <h3 className={tw`${directives.h3}`}>Avatar</h3>
-            <Avatar size="sm" src="https://i.pravatar.cc/" />
-            <Avatar size="md" src="https://i.pravatar.cc/" />
-            <Avatar size="lg" src="https://i.pravatar.cc/" />
+            <Avatar size="sm" src="https://i.pravatar.cc/150" />
+            <Avatar size="md" src="https://i.pravatar.cc/150" />
+            <Avatar size="lg" src="https://i.pravatar.cc/150" />
           </section>
 
           <section className={tw`${directives.section}`}>
             <h3 className={tw`${directives.h3}`}>Avatar (Round)</h3>
-            <Avatar size="sm" round={true} src="https://i.pravatar.cc/" />
-            <Avatar size="md" round={true} src="https://i.pravatar.cc/" />
-            <Avatar size="lg" round={true} src="https://i.pravatar.cc/" />
+            <Avatar size="sm" round={true} src="https://i.pravatar.cc/150" />
+            <Avatar size="md" round={true} src="https://i.pravatar.cc/150" />
+            <Avatar size="lg" round={true} src="https://i.pravatar.cc/150" />
           </section>
 
           <section className={tw`${directives.section}`}>

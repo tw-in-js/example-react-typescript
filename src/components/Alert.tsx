@@ -6,7 +6,7 @@ export interface AlertProps {
   /**
    * The contents of the alert box
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Instance-level classNames will override local classNames
    */

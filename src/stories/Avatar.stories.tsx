@@ -12,7 +12,7 @@ const Template: Story<AvatarProps> = (args) => <Avatar {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  src: 'https://i.pravatar.cc/100',
+  src: 'https://i.pravatar.cc/150',
   round: false,
   size: 'md',
 };
