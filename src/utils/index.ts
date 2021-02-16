@@ -1,4 +1,4 @@
-import type { Context } from 'twind';
+import type { Context, Token } from 'twind';
 export const __DEV__ = true;
 
 // process.env
@@ -25,6 +25,6 @@ export const logClassNames = (
   }
 };
 
-export function lazy(arg: TemplateStringsArray) {
-  return ({ tw }: Context) => tw(arg);
+export function lazy(arg: TemplateStringsArray, ...interpolations: Token[]) {
+  return ({ tw }: Context) => tw(arg, ...interpolations);
 }
