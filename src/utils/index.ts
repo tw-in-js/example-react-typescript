@@ -1,3 +1,4 @@
+import type { Context } from 'twind';
 export const __DEV__ = true;
 
 // process.env
@@ -23,3 +24,7 @@ export const logClassNames = (
     console.log(classNames);
   }
 };
+
+export function lazy(arg: TemplateStringsArray) {
+  return ({ tw }: Context) => tw(arg);
+}
