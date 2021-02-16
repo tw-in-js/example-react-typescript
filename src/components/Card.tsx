@@ -3,30 +3,23 @@
  */
 
 import * as React from 'react';
-import { tw } from 'twind';
+import { tw, apply } from 'twind';
+import type { BaseComponent } from '../types';
 
-export type CardProps = {
-  /**
-   * The card contents
-   */
-  children?: React.ReactNode;
-  /**
-   * Instance-level classNames will override local classNames
-   */
-  className?: string;
+export interface CardProps extends BaseComponent {
   /**
    * Adds a raised appearance with a box shadow
    */
   elevation?: 0 | 1 | 2 | 3 | 4 | 5;
   /**
-   * Optionally provide a style object
-   */
-  style?: React.CSSProperties;
-  /**
    * Optionally pass a card title
    */
   title?: string;
-};
+  /**
+   * Optionally className for the title component
+   */
+  titleClassName?: string;
+}
 
 const elevationClassNames = [
   'shadow-sm',
@@ -37,28 +30,36 @@ const elevationClassNames = [
 ];
 
 export const Card = ({
-  title,
   children,
   className = '',
   style = {},
   elevation = 0,
+  title,
+  titleClassName = '',
 }: CardProps) => {
   const elevationClassName = elevationClassNames[elevation];
-  const classNames = tw`
+  const appliedClassNames = apply`
     bg-white
     p-4 
     rounded-lg 
     ${elevationClassName}
-    override:(${className})
   `;
+
+  const appliedTitleClassNames = apply`text(gray-700 uppercase xl) font(semibold) mb-4`;
   return (
-    <section style={style} className={classNames}>
+    <section style={style} className={tw(appliedClassNames, className)}>
       {title && (
-        <h2 className={tw`text(purple-700 uppercase xl) font(semibold) mb-4`}>
-          {title}
-        </h2>
+        <h2 className={tw(appliedTitleClassNames, titleClassName)}>{title}</h2>
       )}
       {children}
     </section>
   );
+};
+
+// eslint-disable-next-line functional/immutable-data
+Card.defaultProps = {
+  className: '',
+  style: {},
+  elevation: 0,
+  titleClassName: '',
 };

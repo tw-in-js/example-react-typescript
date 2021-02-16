@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { tw } from 'twind';
+import { tw, apply } from 'twind';
 
 export type SpinnerProps = {
+  /**
+   * Optionally pass a className
+   */
   className?: string;
 };
 
-export const Spinner = ({ className }: SpinnerProps) => {
+export const Spinner = ({ className = '' }: SpinnerProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +17,7 @@ export const Spinner = ({ className }: SpinnerProps) => {
       viewBox="0 0 50 50"
       // Applying `override:(${className})` breaks the custom animation
       // that is applied to the instance in ./Button.tsx
-      className={tw`fill-current ${className}`}
+      className={tw`${apply('fill-current')} ${className}`}
     >
       <g>
         <path d="M25,14.3L25,14.3c-1.3,0-2.4-1.1-2.4-2.4V3.4C22.6,2.1,23.7,1,25,1l0,0c1.3,0,2.4,1.1,2.4,2.4v8.4   C27.4,13.2,26.3,14.3,25,14.3z" />
@@ -28,4 +31,9 @@ export const Spinner = ({ className }: SpinnerProps) => {
       </g>
     </svg>
   );
+};
+
+// eslint-disable-next-line functional/immutable-data
+Spinner.defaultProps = {
+  className: '',
 };

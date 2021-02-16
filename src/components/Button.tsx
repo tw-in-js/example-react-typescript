@@ -11,18 +11,15 @@ This is an example of a reusable button component:
 */
 
 import * as React from 'react';
-import { tw } from 'twind';
+import { tw, apply } from 'twind';
 import { Spinner } from './Spinner';
-import { __DEV__, logClassNames } from '../utils';
+import { __DEV__, logClassNames, lazy } from '../utils';
 import { slowspin } from '../animations';
-import type { InlineDirectiveMap } from '../types';
+import type { InlineDirectiveMap, BaseComponent } from '../types';
 
 export interface ButtonProps
-  extends Omit<React.HTMLAttributes<HTMLButtonElement>, 'size'> {
-  /**
-   * Instance-level classNames will override local classNames
-   */
-  className?: string;
+  extends BaseComponent,
+    Omit<React.HTMLAttributes<HTMLButtonElement>, 'size'> {
   /**
    * Determines if the button is clickable
    */
@@ -39,10 +36,6 @@ export interface ButtonProps
    * Controls the text size and padding of the button
    */
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  /**
-   * Optionally provide a style object
-   */
-  style?: React.CSSProperties;
   /**
    * Determines the color of the button
    */
@@ -61,18 +54,18 @@ type sizes = 'sm' | 'md' | 'lg' | 'xl';
 
 // The inline functions allow Twind to cache the derived classNames
 const sizeMap: InlineDirectiveMap<sizes> = {
-  sm: ({ tw }) => tw`text-xs py(2 md:1) px-2`,
-  md: ({ tw }) => tw`text-sm py(3 md:2) px-2`,
-  lg: ({ tw }) => tw`text-lg py-2 px-4`,
-  xl: ({ tw }) => tw`text-xl py-3 px-6`,
+  sm: lazy`text-xs py(2 md:1) px-2`,
+  md: lazy`text-sm py(3 md:2) px-2`,
+  lg: lazy`text-lg py-2 px-4`,
+  xl: lazy`text-xl py-3 px-6`,
 };
 
 // The inline functions allow Twind to cache the derived classNames
 const spinnerSizeMap: InlineDirectiveMap<sizes> = {
-  sm: ({ tw }) => tw`w-3 h-3 mr-1`,
-  md: ({ tw }) => tw`w-4 h-4 mr-1`,
-  lg: ({ tw }) => tw`w-5 h-5 mr-2`,
-  xl: ({ tw }) => tw`w-6 h-6 mr-2`,
+  sm: lazy`w-3 h-3 mr-1`,
+  md: lazy`w-4 h-4 mr-1`,
+  lg: lazy`w-5 h-5 mr-2`,
+  xl: lazy`w-6 h-6 mr-2`,
 };
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -90,27 +83,19 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       variant = 'primary',
       ...rest
     } = props;
-    // Get the background color
-    const variantColor = variantMap[variant];
-    // Create the background color classNames with pseudo variants
-    const bgClassNames = `bg(${variantColor}(500 600(hover:& focus:&)))`;
-    // Get the text size based on the "size" prop
-    const sizeClassNames = sizeMap[size];
-    // Create the full className, passing the instance-level classNames to the "override" variant
-    const classNames = tw`
+
+    const appliedClassNames = apply`
+    ${sizeMap[size]}
+    bg(${variantMap[variant]}(500 600(hover:& focus:&)))
     w(full sm:auto)
-    ${bgClassNames}
-    ${sizeClassNames}
     text(sm white uppercase) 
     rounded-${round ? 'full' : 'md'} 
     border-none 
     transition-colors 
     duration-300
-    override:(${disabled && 'bg-gray-400 text-gray-100 cursor-not-allowed'})
-    override:(${className})
   `;
 
-    const spinnerSizeClassName = spinnerSizeMap[size];
+    const classNames = tw(appliedClassNames, className);
 
     function handleOnClick(e: React.MouseEvent<HTMLButtonElement>) {
       logClassNames(classNames, children);
@@ -132,7 +117,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           <Spinner
             className={tw`
               text-current 
-              ${[slowspin, spinnerSizeClassName, !loading && 'hidden']}
+              ${[slowspin, spinnerSizeMap[size], !loading && 'hidden']}
             `}
           />
 
@@ -142,3 +127,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
   },
 );
+
+// eslint-disable-next-line functional/immutable-data
+Button.defaultProps = {
+  className: '',
+  disabled: false,
+  loading: false,
+  round: false,
+  size: 'md',
+  variant: 'primary',
+};

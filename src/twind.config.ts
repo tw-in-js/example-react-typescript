@@ -19,6 +19,14 @@ setup({
         orange: colors.orange,
         teal: colors.teal,
       },
+      backgroundColor: {
+        orange: colors.orange,
+        teal: colors.teal,
+      },
+      borderColor: {
+        orange: colors.orange,
+        teal: colors.teal,
+      },
     },
   },
 });

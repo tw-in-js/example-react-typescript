@@ -1,16 +1,9 @@
 import * as React from 'react';
-import { tw } from 'twind';
+import { tw, apply } from 'twind';
 import { Transition } from '@headlessui/react';
+import type { BaseComponent } from '../types';
 
-export interface AlertProps {
-  /**
-   * The contents of the alert box
-   */
-  children?: React.ReactNode;
-  /**
-   * Instance-level classNames will override local classNames
-   */
-  className?: string;
+export interface AlertProps extends BaseComponent {
   /**
    * Determines rather the user can close the alert box
    */
@@ -44,21 +37,18 @@ export const Alert = ({
   className = '',
   closable = false,
   variant = 'default',
+  style = {},
 }: AlertProps) => {
   const [show, setShow] = React.useState(true);
   const color = colorMap[variant];
-  const classNames = tw`
+  const appliedCclassNames = apply`
     border-l-4 
     p-4 
     flex 
     flex-wrap
     items-center 
     justify-between 
-    ${[
-      `bg-${color}-100`,
-      `border-${color}-500`,
-      `text-${color}-800`,
-    ]} override:(${className})`;
+    ${[`bg-${color}-100`, `border-${color}-500`, `text-${color}-800`]}`;
   return (
     <Transition
       show={show}
@@ -69,7 +59,11 @@ export const Alert = ({
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className={classNames} role="alert">
+      <div
+        className={tw(appliedCclassNames, className)}
+        role="alert"
+        style={style}
+      >
         <div>
           {title && <p className={tw`font-semibold`}>{title}</p>}
           {children}

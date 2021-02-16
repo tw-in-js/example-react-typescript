@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { tw } from 'twind';
+import { tw, apply } from 'twind';
 import { slowspin } from '../animations';
 
 export type ReactLogoProps = {
@@ -7,14 +7,12 @@ export type ReactLogoProps = {
   spin?: boolean;
 };
 
-export const ReactLogo = ({
-  className = '',
-  spin = false,
-  ...rest
-}: ReactLogoProps) => {
+export const ReactLogo = (props: ReactLogoProps) => {
+  const { className = '', spin = false, ...rest } = props;
+  const appliedClassNames = apply`${spin && slowspin} h-16`;
   return (
     <svg
-      className={tw`${spin && slowspin} h-16 override:(${className})`}
+      className={tw(appliedClassNames, className)}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 841.9 595.3"
       {...rest}
@@ -25,4 +23,10 @@ export const ReactLogo = ({
       </g>
     </svg>
   );
+};
+
+// eslint-disable-next-line functional/immutable-data
+ReactLogo.defaultProps = {
+  className: '',
+  spin: false,
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Story, Meta } from '@storybook/react';
 
-import { Avatar, AvatarProps } from '../components/Avatar.styled';
+import { Avatar, AvatarProps } from '../components/Avatar';
 
 export default {
   title: 'Example/Avatar',
