@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Story, Meta } from '@storybook/react';
 
-import { Pill, PillProps } from '../components/Pill.styled';
+import { Pill, PillProps } from '../components/Pill';
 
 export default {
   title: 'Example/Pill',
