@@ -8,11 +8,11 @@ import { ReactLogo } from './components/ReactLogo';
 import { Tips } from './components/Tips';
 
 // Styled components
-import { Avatar } from './components/Avatar.styled';
-import { Pill } from './components/Pill.styled';
-import { Header } from './components/Header.styled';
-import { Input } from './components/Input.styled';
-import { SkipLink } from './components/SkipLink.styled';
+import { Avatar } from './components/Avatar';
+import { Pill } from './components/Pill';
+import { Header } from './components/Header';
+import { Input } from './components/Input';
+import { SkipLink } from './components/SkipLink';
 
 import type { InlineDirectiveMap } from './types';
 
