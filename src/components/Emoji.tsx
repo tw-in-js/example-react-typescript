@@ -2,26 +2,34 @@
 // See https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/accessible-emoji.md
 import * as React from 'react';
 import { tw } from 'twind';
-
-export type EmojiProps = {
+export interface EmojiProps {
   /**
-   * Alternative text for assistive technologies.
+   * Alternative text for assistive technologies
    */
   alt: string;
   /**
-   * The actual emoji to display.
+   * The emoji or symbol to display
    */
   symbol: string;
   /**
-   * Optional className to apply.
+   * Optionally apply a className
    */
   className?: string;
-};
+}
 
-export const Emoji: React.FC<EmojiProps> = ({ symbol, alt, className }) => {
+/**
+ * The Emoji component is used for displaying emojis and symbols, with an emphasis on accessibility.
+ */
+export const Emoji = (props: EmojiProps) => {
+  const { symbol, alt, className = '' } = props;
   return (
-    <span role="img" aria-label={alt} className={tw`${className}`}>
+    <span role="img" aria-label={alt} className={tw(className)}>
       {symbol}
     </span>
   );
+};
+
+// eslint-disable-next-line functional/immutable-data
+Emoji.defaultProps = {
+  className: '',
 };
