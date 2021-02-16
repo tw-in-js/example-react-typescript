@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { tw, apply } from 'twind';
-import { __DEV__ } from '../utils';
+import { __DEV__, lazy } from '../utils';
 
 const SIZES_MAP = {
-  sm: 'px-3 py-1 text-xs',
-  md: 'px-3 py-1 text-base',
-  lg: 'px-3 py-2 text-lg',
+  sm: lazy`px-3 py-1 text-xs`,
+  md: lazy`px-3 py-1 text-base`,
+  lg: lazy`px-3 py-2 text-lg`,
 };
 
 export interface InputProps
